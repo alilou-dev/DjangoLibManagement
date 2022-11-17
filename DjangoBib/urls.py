@@ -17,6 +17,7 @@ import logging
 from django.contrib import admin
 from django.urls import path, include
 from DjangoBib import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +25,5 @@ urlpatterns = [
     path('account/', include('Account.urls')),
     path('', include('django.contrib.auth.urls'))
 ]
+urlpatterns += staticfiles_urlpatterns()
+

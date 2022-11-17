@@ -31,8 +31,7 @@ class AccountCreationForm(forms.Form):
     adress = forms.CharField(max_length = 200, required=True)  
     zipCode = forms.CharField(max_length = 5, required=True)  
     city = forms.CharField(max_length = 20, required=True)
-    phoneNumber = forms.CharField(max_length=200)
     class Meta:
         model = Account
-        fields = ["firstName","lastName","birthday","accountType","adress","zipCode","city","phoneNumber"]
+        fields = ["firstName","lastName","birthday","accountType","adress","zipCode","city"]
             

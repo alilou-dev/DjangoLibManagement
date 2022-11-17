@@ -2,7 +2,6 @@
 
 import datetime
 from django.db import migrations, models
-import phonenumber_field.modelfields
 
 
 class Migration(migrations.Migration):
@@ -21,11 +20,6 @@ class Migration(migrations.Migration):
             model_name='account',
             name='city',
             field=models.CharField(default='', max_length=20),
-        ),
-        migrations.AddField(
-            model_name='account',
-            name='phoneNumber',
-            field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, region=None),
         ),
         migrations.AddField(
             model_name='account',

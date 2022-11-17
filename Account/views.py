@@ -19,7 +19,6 @@ def createAccount(request):
                 adress = request.POST['adress'],
                 zipCode = request.POST['zipCode'],
                 city = request.POST['city'],
-                phoneNumber = request.POST['phoneNumber'],
                 accountType = request.POST['accountType'],
             )
             return redirect("/home")
