@@ -1,5 +1,12 @@
 {% extends 'shared/base.html' %}
 {% block title %} Home Page {% endblock %}
 {% block content %} 
-    <h1> home Page </h1>
+    {% if request.user.account.accountType != 'cl' and request.user.account.accountType != 'lb' %}
+        <div class="btn-block">
+            <a href="/account/create" class="btn btn-success" role="button">vous n'avez pas encore de compte !</a>
+        </div>
+
+        {% endif %}
+        <h1> home Page </h1>
+
 {% endblock %}

@@ -8,7 +8,7 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info" >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
         <div class="container-fluid">
             <div>
                 <ul class="navbar-nav">
@@ -16,10 +16,49 @@
                     <li class="nav-item">
                         <a class ="nav-link" href="/home"> Home </a>
                     </li>
-                    <li class="nav-item">
-                        <a class ="nav-link" href="/publish-book"> Publish </a>
-                    </li>
-                    {%endif%}
+                        {% if request.user.account.accountType == 'lb' %}
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/mylibrary"> Mes Livres publiés </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/newbook"> Publier un Livre </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/managesellerrequest"> Gérer Mes Demandes </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/requestSellerDone"> Mes demandes achevées </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/loansSeller"> Mes Emprunts </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/manageReadingGroupsForSeller"> Gérer mes groupes de lectures </a>
+                            </li>
+                        {% endif %}
+                        {% if request.user.account.accountType == 'cl' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account/library">Librairie</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account/mybooks">Mes Emprunts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account/manageclientrequest">Gérer Mes Demandes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/requestClientDone"> Mes demandes achevées </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/manageReadingGroupsForClient"> Gérer Groupes de lecture </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class ="nav-link" href="/account/allReadingGroup"> Groupes de lecture </a>
+                            </li>
+                            
+                        {% endif %}
+                        
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -1,0 +1,39 @@
+{% extends 'shared/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks%}
+{% block title %}Mes Emprunts{% endblock %}
+{% block content %} 
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% for loan in loans %}
+        <div>
+            <label for="">Title</label>
+            {{loan.book_title}}
+        </div>
+        <div>
+            <label for="">livre à rendre au plus tard :</label>
+            {{loan.returned_date}} 
+        </div>
+        <div>
+            <label for="">publié par : </label>
+            {{loan.othor_username}}
+        </div>
+            {% if loan.delay_in_days > 0 %}
+                <div>
+                    <label for="">vous avez un retard de : </label>
+                    {{loan.delay_in_days}} Jours
+                </div>
+            {% endif %}
+        {% endfor %}
+    </body>
+</html>
+
+
+
+
+
+
+{% endblock %}
