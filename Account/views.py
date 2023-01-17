@@ -106,8 +106,12 @@ def rentedBooks(request):
     loansVM = []
     #build view model for client loans
     for op in loans :
+        # Retreive the target book 
+        target_book = models.Book.objects.get(pk = op['target_book_id'])
         delay_in_days = 0 
-        book_title = models.Book.objects.filter(pk = op["target_book_id"]).values('title')[0]['title']
+        bookID = target_book.id
+        book_title = target_book.title
+        nbBooks = op['nbBooks']
         client_username = models.User.objects.filter(pk = op['seller_id']).values('username')[0]['username']
         returned_date = op['rental_start_date'] + timedelta(days= op['period_rental']) 
         dt = datetime.now().replace(tzinfo=timezone.utc)    
@@ -116,7 +120,7 @@ def rentedBooks(request):
             delay_in_days = diff
             vm = LoansVM(book_title, client_username, returned_date, abs(delay_in_days))
         else : 
-            vm = LoansVM(book_title, client_username, returned_date)    
+            vm = LoansVM(book_title, client_username, returned_date, target_book_id= bookID)    
         loansVM.append(vm)
     return render(request, 'clientRentedBook.html', {'loans' : loansVM})
 
@@ -534,5 +538,5 @@ def isBookInUserLoans(user, book):
 # créer des groupe de lecture et les conditions pour pouvoir s'ajouter au groupe (INPROGRESS)
 # create private function checkIfUserRentedTheTargetBookOfTheReadingBook for JoinGroups (TODO)
 # improve challengeRequestClient so that we can challenge ONLY one or many things of the requestClient gérer le vocabulaire dans challengeOperation.html see(TODO)   
-# problème avec les images     
+# problème avec les images (TODO)     
     
