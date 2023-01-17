@@ -55,7 +55,7 @@ class Book(models.Model):
     )
     release_date = models.DateField(default=date.today)
     is_available = models.BooleanField(default=True)
-    bookImage = models.ImageField(upload_to='../images/')
+    bookImage = models.ImageField(upload_to='')
     
     def __str__(self):
         return self.title
@@ -66,7 +66,7 @@ class ReadingGroup(models.Model):
     name = models.CharField(max_length=30)  
     is_full = models.BooleanField(default=False)
     is_canceled = models.BooleanField(default=False)
-    img = models.ImageField(upload_to='../images/')
+    img = models.ImageField(upload_to='')
     nbMembers = models.IntegerField(default=0)
     eventDate = models.DateField(default=date.today)
     eventMoment = models.TimeField(default=datetime.now().time())

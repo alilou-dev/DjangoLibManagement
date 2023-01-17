@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from main.form import AccountCreationForm, BookCreationForm, RequestForBookForm, ManageBookForm, AddReadingGroupForm, ChallengeRequestForm
 from django.contrib.auth.models import User
 from Account import models
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
 from datetime import datetime, timedelta, timezone
@@ -89,7 +90,9 @@ def publishedBooks(request):
     books = list()
     for id in bookIds : 
         result = models.Book.objects.filter(pk = id['book_id']).values()[0] 
+        print(result)
         books.append(result)
+    print(settings.MEDIA_URL)
         
     return render(request, 'sellerLibrary.html', {'books' : books})    
 
