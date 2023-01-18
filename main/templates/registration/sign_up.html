@@ -1,6 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load crispy_forms_tags %}
-{% load widget_tweaks%}
+{% load widget_tweaks %}
 {% block title %}Sign Up {% endblock %}
 {% block content %}
 	<html>
@@ -154,11 +154,10 @@
 							<form method="post">
 								{% csrf_token %}
 								<h3>SIGN UP</h3>
-								{% render_field form.username type="text" placeholder="USERNAME"
-								%} {% render_field form.email type="email" placeholder="EMAIL" %}
-								{% render_field form.password1 type="password"
-								placeholder="PASSWORD" %} {% render_field form.password2
-								type="password" placeholder="PASSWORD" %}
+								{% render_field form.username type="text" placeholder="USERNAME" %}
+								{% render_field form.email type="email" placeholder="EMAIL" %}
+								{% render_field form.password1 type="password" placeholder="PASSWORD" %}
+								{% render_field form.password2 type="password" placeholder="PASSWORD" %}
 								<button class="submit">Create</button>
 							</form>
 						</div>

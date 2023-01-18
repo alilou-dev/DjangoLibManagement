@@ -155,8 +155,7 @@
 								{% csrf_token %}
 								<h3>SIGN IN</h3>
 								{% render_field form.username type="text" placeholder="USERNAME"%}
-								{% render_field form.password type="password"
-								placeholder="PASSWORD" %}
+								{% render_field form.password type="password" placeholder="PASSWORD" %}
 								<div class="top_link">
 									<a href="/password_reset">password forgot ?</a>
 								</div>
