@@ -18,11 +18,5 @@ COPY requirements.txt /code/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-
-# copy entrypoint.sh
-
-
 # copy project
 COPY . .
-
-# run entrypoint.sh
