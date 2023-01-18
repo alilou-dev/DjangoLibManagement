@@ -4,6 +4,7 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date, datetime
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
@@ -55,8 +56,8 @@ class Book(models.Model):
     )
     release_date = models.DateField(default=date.today)
     is_available = models.BooleanField(default=True)
-    bookImage = models.ImageField(upload_to='')
-
+    bookImage = models.ImageField(null=True,upload_to='bookPictures',default='bookPictures/droit.jpeg')
+    
     def __str__(self):
         return self.title
 
@@ -66,7 +67,7 @@ class ReadingGroup(models.Model):
     name = models.CharField(max_length=30)
     is_full = models.BooleanField(default=False)
     is_canceled = models.BooleanField(default=False)
-    img = models.ImageField(upload_to='')
+    img = models.ImageField(null=True,upload_to='bookPictures',default='bookPictures/droit.jpeg')
     nbMembers = models.IntegerField(default=0)
     eventDate = models.DateField(default=date.today)
     eventMoment = models.TimeField(default=datetime.now().time())
@@ -77,8 +78,8 @@ class ReadingGroup(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['created_by','book'],
-                name = 'unique_OwnerGroup_targetBook_combination',
+                fields=['created_by','book', 'eventDate', 'eventMoment'],
+                name = 'unique_ReadingGroup_contraint',
             )
         ]
 

@@ -88,13 +88,10 @@ def addBook(request):
 def publishedBooks(request):
     bookIds = models.SellerBook.objects.filter(seller = request.user).values('book_id')
     books = list()
-    for id in bookIds :
-        result = models.Book.objects.filter(pk = id['book_id']).values()[0]
-        print(result)
+    for id in bookIds : 
+        result = models.Book.objects.filter(pk = id['book_id']).values()[0] 
         books.append(result)
-    print(settings.MEDIA_URL)
-
-    return render(request, 'sellerLibrary.html', {'books' : books})
+    return render(request, 'sellerLibrary.html', {'books' : books})    
 
 
 @perm_client_required
@@ -417,18 +414,24 @@ def createReadingGroup(request, bookID):
     if request.method == 'POST':
         form = AddReadingGroupForm(request.POST)
         if form.is_valid():
-            #first create the group
-            newBook = models.ReadingGroup.objects.create(
-                created_by = request.user,
-                book_id = bookID,
-                name = request.POST['name'],
-                img = request.POST['img'],
-                eventDate = request.POST['eventDate'],
-                eventMoment = request.POST['eventMoment'],
-                adresse = request.POST['adress'],
-                codeZip = request.POST['zipCode'],
-                city = request.POST['city'],
-            )
+            #first try create the group
+            try : 
+                
+                newBook = models.ReadingGroup.objects.create(
+                    created_by = request.user,
+                    book_id = bookID,
+                    name = request.POST['name'],
+                    img = request.POST['img'],
+                    eventDate = request.POST['eventDate'],
+                    eventMoment = request.POST['eventMoment'],
+                    adresse = request.POST['adress'],
+                    codeZip = request.POST['zipCode'],
+                    city = request.POST['city'],
+                )
+                
+            except IntegrityError :
+                # TODO add message error pour dire pas possible de programmer deux groupe de lecture différent avec le meme sujet au meme moment ! 
+                return redirect('/account/mylibrary')    
             return redirect("/account/manageReadingGroupsForSeller")
     else :
         form = AddReadingGroupForm()
@@ -459,8 +462,8 @@ def manageSellerReadingGroup(request):
         is_canceled = group['is_canceled']
         eventDate = group['eventDate']
         eventMoment = group['eventMoment']
-
-        vm = GroupsVM(name = name, nameBook= nameBook, imgPath=imgPath, adress = adress, nbParticipents = nbParticipents, nbFreePlaces = nbFreePlaces, idGroup= id, is_canceled = is_canceled, eventDate = eventDate, is_full = is_full)
+        
+        vm = GroupsVM(name = name, nameBook= nameBook, imgPath=imgPath, adress = adress, nbParticipents = nbParticipents, nbFreePlaces = nbFreePlaces, idGroup= id, is_canceled = is_canceled, eventDate = eventDate, is_full = is_full, eventMoment=eventMoment)
         groupsVM.append(vm)
 
     return render(request, 'manageSellerGroups.html', {'groups' : groupsVM})

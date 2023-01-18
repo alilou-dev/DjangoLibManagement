@@ -9,7 +9,37 @@
 			{% for book in books %}
 			<div>{{ book.title }}</div>
 
-			<div>{{ book.editor }}</div>
+<html>
+	<head> </head>
+	<body>
+		{% for book in books %}
+		<div>{{ book.title }}</div>
+
+		<div>{{ book.editor }}</div>
+
+        <div>
+            {{ book.shortDescription }}
+        </div>    
+        <div>
+            {{ book.resume }}
+        </div>    
+        <div>
+            {{ book.price }}
+        </div>
+        <div>
+            <img src="/media/bookPictures/droit.jpeg" alt="my image">
+        </div> 
+        <div>
+            nombre de livre dispo : {{ book.quantity }}
+        </div>        
+        {% if book.quantity > 0 %}
+        <div class="btn-block">
+            <a class="btn btn-primary" href="/account/requestBook/{{book.id}}" role="button">Demander ce livre</a>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </body>
+</html>
 
 			<div>{{ book.shortDescription }}</div>
 			<div>{{ book.resume }}</div>
