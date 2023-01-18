@@ -1,49 +1,28 @@
-{% extends 'shared/base.html' %}
-{% load crispy_forms_tags %}
-{% load widget_tweaks%}
-{% block title %}Mes Livres{% endblock %}
-{% block content %} 
+{% extends 'shared/base.html' %} {% load crispy_forms_tags %} {% load
+widget_tweaks%} {% block title %}Mes Livres{% endblock %} {% block content %}
 
 <html>
-    <head>
-
-    </head>
-    <body>
-        {% for book in books %}
-        <div>
-            {{ book.title }}
-        </div>    
-        <div>
-            {{ book.editor }}
-        </div>    
-        <div>
-            {{ book.price }}
-        </div>    
-        <div>
-            {{ book.shortDescription }}
-        </div>    
-        <div>
-            {{ book.resume }}
-        </div>   
-        <div>
-            <img src="/media/droit.jpeg" alt="my image">
-        </div> 
-        <div>
-            <a class="btn btn-success" href="/account/manageBook/{{book.id}}"> Gérer mon livre </a>
-            <a class="btn btn-dark" href="/account/createReadingGroup/{{book.id}}"> Organiser un groupe de lecture</a>
-        </div>    
-        {% endfor %}
-    </body>
+	<head> </head>
+	<body>
+		{% for book in books %}
+		<div>{{ book.title }}</div>
+		<div>{{ book.editor }}</div>
+		<div>{{ book.price }}</div>
+		<div>{{ book.shortDescription }}</div>
+		<div>{{ book.resume }}</div>
+		<div>
+			<img src="/media/droit.jpeg" alt="my image" />
+		</div>
+		<div>
+			<a class="btn btn-success" href="/account/manageBook/{{book.id}}">
+				Gérer mon livre
+			</a>
+			<a class="btn btn-dark" href="/account/createReadingGroup/{{book.id}}">
+				Organiser un groupe de lecture</a
+			>
+		</div>
+		{% endfor %}
+	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

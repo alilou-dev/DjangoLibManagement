@@ -1,46 +1,41 @@
-{% extends 'shared/base.html' %}
-{% load crispy_forms_tags %}
-{% load widget_tweaks%}
-{% block title %}Mes Emprunts{% endblock %}
-{% block content %} 
+{% extends 'shared/base.html' %} {% load crispy_forms_tags %} {% load
+widget_tweaks%} {% block title %}Mes Emprunts{% endblock %} {% block content %}
 <html>
-    <head>
-
-    </head>
-    <body>
-        {% for loan in loans %}
-        <div>
-            <label for="">Vous Avez louer ce livre a :</label>
-            {{loan.othor_username}}
-        </div>
-        <div>
-            <label for="">titre : </label>
-            {{loan.book_title}}
-        </div>
-        <div>
-            <label for="">nombre d'exemplaires loués : </label>
-            {{loan.nbBooks}}
-        </div>
-        <div>
-            <label for="">loué jusuq'au : </label>
-            {{loan.returned_date}}
-        </div>
-        {% if loan.delay_in_days > 0 %}
-                <div>
-                    <label for="">le client a un retard de : </label>
-                    {{loan.delay_in_days}} Jours
-                </div>
-            {% endif %}
-        <div class="btn-block">
-            <a class="btn btn-success" href="/account/restoreBook/{{loan.operationID}}" role="button">marqué comme rendu</a>
-        </div>
-        {% endfor %}
-    </body>
+	<head> </head>
+	<body>
+		{% for loan in loans %}
+		<div>
+			<label for="">Vous Avez louer ce livre a :</label>
+			{{loan.othor_username}}
+		</div>
+		<div>
+			<label for="">titre : </label>
+			{{loan.book_title}}
+		</div>
+		<div>
+			<label for="">nombre d'exemplaires loués : </label>
+			{{loan.nbBooks}}
+		</div>
+		<div>
+			<label for="">loué jusuq'au : </label>
+			{{loan.returned_date}}
+		</div>
+		{% if loan.delay_in_days > 0 %}
+		<div>
+			<label for="">le client a un retard de : </label>
+			{{loan.delay_in_days}} Jours
+		</div>
+		{% endif %}
+		<div class="btn-block">
+			<a
+				class="btn btn-success"
+				href="/account/restoreBook/{{loan.operationID}}"
+				role="button"
+				>marqué comme rendu</a
+			>
+		</div>
+		{% endfor %}
+	</body>
 </html>
-
-
-
-
-
 
 {% endblock %}

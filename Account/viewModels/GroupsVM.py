@@ -24,5 +24,4 @@ class GroupsVM():
         self.is_canceled = is_canceled
         self.is_full = is_full
         self.eventMoment = eventMoment
-        
-    
+

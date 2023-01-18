@@ -27,7 +27,7 @@ from main import form
 def home(request):
     return render(request, 'shared/home.html')
 
-    
+
 def register(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
@@ -36,10 +36,10 @@ def register(request):
                 user = form.save()
                 login_process(request, user)
                 return redirect(views.createAccount)
-                
+
         else :
-            form = RegisterForm()    
-        	
+            form = RegisterForm()
+
         return render(request, 'registration/sign_up.html', {"form": form})
     else :
        return redirect('/home')

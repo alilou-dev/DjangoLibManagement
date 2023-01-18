@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'widget_tweaks',
     'django_rest_passwordreset',
-    'multiselectfield',    
+    'multiselectfield',
 ]
 
 # django-crispy-forms
@@ -95,7 +95,7 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'db',
         'PORT': 5432,
-        
+
     }
 }
 

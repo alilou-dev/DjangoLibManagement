@@ -1,62 +1,67 @@
-{% extends 'shared/base.html' %}
-{% load crispy_forms_tags %}
-{% load widget_tweaks%}
-{% block title %}Mes Livres{% endblock %}
-{% block content %} 
+{% extends 'shared/base.html' %} {% load crispy_forms_tags %} {% load
+widget_tweaks%} {% block title %}Mes Livres{% endblock %} {% block content %}
 <html>
-    <head>
-
-    </head>
-    <body>
-        {% if requests%}
-            {% for request in requests %}
-            <div>
-                <label for="">Status</label>
-                {{request.status}}
-            </div>
-            <div>
-                <label for="">Prix :</label>
-                {{request.amount}} €
-            </div>
-            <div>
-                <label for="">publié par : </label>
-                {{request.othor}}
-            </div>
-            <div>
-                <label for="">titre : </label>
-                {{request.book_title}}
-            </div>
-            <div>
-                <label for="">nombre d'exemplaires loués : </label>
-                {{request.nbBooks}}
-            </div>
-            <div>
-                <label for="">loué pour : </label>
-                {{request.nbDays}} Jours
-            </div>
-            <div class="btn-block">
-                {% if  request.status == 'En Attente'%}
-                    <a class="btn btn-primary" href="/account/challengeOperation/{{request.operationID}}" role="button">Refaire une offre</a>
-                {% else %}
-                    <a class="btn btn-primary" href="/account/challengeOperation/{{request.operationID}}" role="button">Refaire une offre</a>
-                    {% if not request.challengedByMe %}
-                    <a class="btn btn-primary" href="/account/acceptRequestSeller/{{request.operationID}}" role="button">Accepter</a>
-                    <a class="btn btn-primary" href="/account/refuseRequestSeller/{{request.operationID}}" role="button">Refuser</a>
-                    {% endif %}
-                {% endif %}
-            </div>
-            {% endfor %}
-        {% else %}
-            <div>
-                Vous avez zéro demande actuellement  
-            </div>      
-        {% endif %}         
-    </body>
+	<head> </head>
+	<body>
+		{% if requests%} {% for request in requests %}
+		<div>
+			<label for="">Status</label>
+			{{request.status}}
+		</div>
+		<div>
+			<label for="">Prix :</label>
+			{{request.amount}} €
+		</div>
+		<div>
+			<label for="">publié par : </label>
+			{{request.othor}}
+		</div>
+		<div>
+			<label for="">titre : </label>
+			{{request.book_title}}
+		</div>
+		<div>
+			<label for="">nombre d'exemplaires loués : </label>
+			{{request.nbBooks}}
+		</div>
+		<div>
+			<label for="">loué pour : </label>
+			{{request.nbDays}} Jours
+		</div>
+		<div class="btn-block">
+			{% if request.status == 'En Attente'%}
+			<a
+				class="btn btn-primary"
+				href="/account/challengeOperation/{{request.operationID}}"
+				role="button"
+				>Refaire une offre</a
+			>
+			{% else %}
+			<a
+				class="btn btn-primary"
+				href="/account/challengeOperation/{{request.operationID}}"
+				role="button"
+				>Refaire une offre</a
+			>
+			{% if not request.challengedByMe %}
+			<a
+				class="btn btn-primary"
+				href="/account/acceptRequestSeller/{{request.operationID}}"
+				role="button"
+				>Accepter</a
+			>
+			<a
+				class="btn btn-primary"
+				href="/account/refuseRequestSeller/{{request.operationID}}"
+				role="button"
+				>Refuser</a
+			>
+			{% endif %} {% endif %}
+		</div>
+		{% endfor %} {% else %}
+		<div>Vous avez zéro demande actuellement</div>
+		{% endif %}
+	</body>
 </html>
-
-
-
-
-
 
 {% endblock %}

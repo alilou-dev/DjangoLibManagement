@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path
 from Account import views
 from django.contrib.auth import views as auth_views
 
@@ -8,9 +8,9 @@ urlpatterns = [
     path('mylibrary/',views.publishedBooks, name="MyLibrary"),
     path('library/',views.allBooks,name='Library'),
     path('mybooks/',views.rentedBooks,name='MyBooks'),
-    path('requestBook/<int:bookId>',views.requestBook, name='RequestBook'),   
+    path('requestBook/<int:bookId>',views.requestBook, name='RequestBook'),
     path('manageclientrequest/',views.manageClientRequest,name='ClientRequests'),
-    path('managesellerrequest/',views.manageSellerRequest,name='SellerRequests'), 
+    path('managesellerrequest/',views.manageSellerRequest,name='SellerRequests'),
     path('challengeOperation/<int:operationId>',views.challengeClientRequest,name='NewRequest'),
     path('requestSellerDone',views.requestSellerDone, name='RequestDone'),
     path('loansSeller/',views.manageSellerLoans, name='SellerLoans'),

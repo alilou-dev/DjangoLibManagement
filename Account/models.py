@@ -21,16 +21,16 @@ class Account(models.Model):
         max_length=2,
         choices = ACCOUNT_TYPE,
         default = 'cl',
-        
+
     )
     adress = models.CharField(max_length = 200, default = '')
     city = models.CharField(max_length = 50, default = '')
     zipCode = models.CharField(max_length = 5, default = '0000')
     phone_number = models.CharField(max_length=15, default='0658248398')
-    
+
     def __str__(self):
         return self.user.username
-    
+
 class Book(models.Model):
     published_by = models.ForeignKey(User, on_delete= models.DO_NOTHING, related_name='mybook', default=None)
     title = models.CharField(max_length = 100, default = "Title Book", unique=True)
@@ -56,14 +56,14 @@ class Book(models.Model):
     release_date = models.DateField(default=date.today)
     is_available = models.BooleanField(default=True)
     bookImage = models.ImageField(upload_to='')
-    
+
     def __str__(self):
         return self.title
-    
+
 class ReadingGroup(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='group')
-    name = models.CharField(max_length=30)  
+    name = models.CharField(max_length=30)
     is_full = models.BooleanField(default=False)
     is_canceled = models.BooleanField(default=False)
     img = models.ImageField(upload_to='')
@@ -73,7 +73,7 @@ class ReadingGroup(models.Model):
     adresse = models.CharField(default='1 rue etoile', max_length=30)
     codeZip = models.IntegerField(default=75001, max_length=10)
     city = models.CharField(default='Paris', max_length=50)
-          
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -81,16 +81,16 @@ class ReadingGroup(models.Model):
                 name = 'unique_OwnerGroup_targetBook_combination',
             )
         ]
-    
+
     def __str__(self):
-        return self.name     
-        
-   
-#créer une instance de cette antité l'orsque un user s'ajoute a un groupe de lecture    
+        return self.name
+
+
+#créer une instance de cette antité l'orsque un user s'ajoute a un groupe de lecture
 class MembersGroup(models.Model):
     member = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    group = models.ForeignKey(ReadingGroup, on_delete=models.DO_NOTHING)        
-    
+    group = models.ForeignKey(ReadingGroup, on_delete=models.DO_NOTHING)
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -98,24 +98,24 @@ class MembersGroup(models.Model):
                 name = 'unique_member_group_combination',
             )
         ]
-        
-    
-#créer une instance lorsque lopération passe en status success et supprimé cette meme instance lorsque le status de l'opération passe en restored    
+
+
+#créer une instance lorsque lopération passe en status success et supprimé cette meme instance lorsque le status de l'opération passe en restored
 class ClientBook(models.Model):
     client = models.ForeignKey(User, on_delete= models.DO_NOTHING, related_name='cb_client')
     book = models.ForeignKey(Book, on_delete=models.DO_NOTHING ,related_name='cb_book')
-    
-    
+
+
 class SellerBook(models.Model):
     seller = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='sb_seller')
-    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, related_name='sb_book')   
-    
+    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, related_name='sb_book')
+
 
 class Operation(models.Model):
     choices=(
         ('P','pending'),
-        #rented 
-        ('S','success'),    
+        #rented
+        ('S','success'),
         ('F','fail'),
         ('C','challenged'),
         ('R','restored'),
@@ -133,12 +133,12 @@ class Operation(models.Model):
         max_length=15,
         choices=choices,
         default='P'
-    ) 
-    
+    )
+
     @property
     def get_return_date_for_book(self):
         return self.nbBooks
-    
+
 class ChallengedOperation(models.Model):
     challenged_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='challenge_user')
     operation = models.OneToOneField(Operation, on_delete=models.DO_NOTHING, related_name='challege_operation')
