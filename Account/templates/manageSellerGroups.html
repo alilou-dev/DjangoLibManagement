@@ -219,7 +219,8 @@
 		</style>
 	</head>
 	<body>
-		{% if groups %} {% for group in groups %}
+		{% if groups %}
+		{% for group in groups %}
 		<div>
 			{% if not group.is_canceled%}
 			<div>
@@ -253,7 +254,7 @@
 			</div>
 			{% endif %}
 			<div>
-				<a class="btn btn-danger" href="/account/removeGroup/{{group.id}}">
+				<a class="btn btn-danger" href="/account/removeGroup/{{group.idGroup}}">
 					Annulé l'événement
 				</a>
 			</div>
