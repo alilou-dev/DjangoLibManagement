@@ -1,2 +1,0 @@
-docker compose run web pip install django-shortcuts
-pip install django-shortcuts
