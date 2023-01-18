@@ -1,36 +1,37 @@
-{% extends 'shared/base.html' %} {% load crispy_forms_tags %} {% load
-widget_tweaks%} {% block title %}mes opération terminées{% endblock %} {% block
-content %}
-<html>
-	<head> </head>
-	<body>
-		{% for request in requests %}
-		<div>
-			<label for="">Status</label>
-			{{request.status}}
-		</div>
-		<div>
-			<label for="">Prix d'un livre :</label>
-			{{request.amount}} €
-		</div>
-		<div>
-			<label for="">offre faite par : </label>
-			{{request.othor}}
-		</div>
-		<div>
-			<label for="">titre : </label>
-			{{request.book_title}}
-		</div>
-		<div>
-			<label for="">nombre d'exemplaires loués : </label>
-			{{request.nbBooks}}
-		</div>
-		<div>
-			<label for="">loué pour : </label>
-			{{request.nbDays}} Jours
-		</div>
-		{% endfor %}
-	</body>
-</html>
-
+{% extends 'shared/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks%}
+{% block title %}Mes opération terminées{% endblock %}
+{% block content %}
+	<html>
+		<head> </head>
+		<body>
+			{% for request in requests %}
+			<div>
+				<label for="">Status</label>
+				{{request.status}}
+			</div>
+			<div>
+				<label for="">Prix d'un livre :</label>
+				{{request.amount}} €
+			</div>
+			<div>
+				<label for="">offre faite par : </label>
+				{{request.othor}}
+			</div>
+			<div>
+				<label for="">titre : </label>
+				{{request.book_title}}
+			</div>
+			<div>
+				<label for="">nombre d'exemplaires loués : </label>
+				{{request.nbBooks}}
+			</div>
+			<div>
+				<label for="">loué pour : </label>
+				{{request.nbDays}} Jours
+			</div>
+			{% endfor %}
+		</body>
+	</html>
 {% endblock %}
