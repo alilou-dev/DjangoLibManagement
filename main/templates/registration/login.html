@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
-{% block title %} Sign In {% endblock %}
+{% block title %}S'identifier{% endblock %}
 {% block content %}
 	<html>
 		<head>
@@ -15,12 +15,14 @@
 				img {
 					width: 100%;
 				}
+
 				.login {
 					height: 1000px;
 					width: 100%;
 					background: radial-gradient(#17a2b8, #545157);
 					position: relative;
 				}
+
 				.login_box {
 					width: 1050px;
 					height: 600pax;
@@ -34,22 +36,27 @@
 					display: flex;
 					overflow: hidden;
 				}
+
 				.login_box .left {
 					width: 41%;
 					height: 100%;
 					padding: 25px 25px;
 				}
+
 				.login_box .right {
 					width: 59%;
 					height: 100%;
 				}
+
 				.left .top_link a {
 					color: #452a5a;
 					font-weight: 400;
 				}
+
 				.left .top_link {
 					height: 20px;
 				}
+
 				.left .contact {
 					display: flex;
 					align-items: center;
@@ -59,10 +66,12 @@
 					width: 73%;
 					margin: auto;
 				}
+
 				.left h3 {
 					text-align: center;
 					margin-bottom: 40px;
 				}
+
 				.left input {
 					border: none;
 					width: 80%;
@@ -75,9 +84,11 @@
 					font-weight: 600;
 					font-size: 14px;
 				}
+
 				.left {
 					background: linear-gradient(-45deg, #dcd7e0, #fff);
 				}
+
 				.submit {
 					border: none;
 					padding: 15px 70px;
@@ -109,6 +120,7 @@
 					position: relative;
 					transform: translate(0%, 45%);
 				}
+
 				.right-text h2 {
 					display: block;
 					width: 100%;
@@ -116,6 +128,7 @@
 					font-size: 50px;
 					font-weight: 500;
 				}
+
 				.right-text h5 {
 					display: block;
 					width: 100%;
@@ -133,6 +146,7 @@
 					bottom: 70px;
 					transform: translate(-50%, 0%);
 				}
+
 				.top_link img {
 					width: 28px;
 					padding-right: 7px;
@@ -147,26 +161,25 @@
 						<div class="top_link">
 							<a href="/register">
 								{% load static %}
-								<img src="{% static 'book.jpg' %}" alt="" />Not Register Yet ?</a
+								<img src="{% static 'book.jpg' %}" alt="" />Pas encore inscrit ?</a
 							>
 						</div>
 						<div class="contact">
 							<form method="post">
 								{% csrf_token %}
-								<h3>SIGN IN</h3>
-								{% render_field form.username type="text" placeholder="USERNAME"%}
+								<h3>S'identifier</h3>
+								{% render_field form.username type="text" placeholder="USERNAME" %}
 								{% render_field form.password type="password" placeholder="PASSWORD" %}
 								<div class="top_link">
-									<a href="/password_reset">password forgot ?</a>
+									<a href="/password_reset">Mot de passe oublié ?</a>
 								</div>
-								<button class="submit">LET'S GO</button>
+								<button class="submit">Se connecter</button>
 							</form>
 						</div>
 					</div>
 					<div class="right">
 						<div class="right-text">
-							<h2>Reading ...</h2>
-							<h5>You're Favorite Library</h5>
+							<h5>Votre librairie favorite</h5>
 						</div>
 						<div class="right-inductor">
 							<img

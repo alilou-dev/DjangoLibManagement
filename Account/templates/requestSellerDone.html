@@ -4,33 +4,33 @@
 {% block title %}Mes opération terminées{% endblock %}
 {% block content %}
 	<html>
-		<head> </head>
+		<head></head>
 		<body>
 			{% for request in requests %}
-			<div>
-				<label for="">Status</label>
-				{{request.status}}
-			</div>
-			<div>
-				<label for="">Prix d'un livre :</label>
-				{{request.amount}} €
-			</div>
-			<div>
-				<label for="">offre faite par : </label>
-				{{request.othor}}
-			</div>
-			<div>
-				<label for="">titre : </label>
-				{{request.book_title}}
-			</div>
-			<div>
-				<label for="">nombre d'exemplaires loués : </label>
-				{{request.nbBooks}}
-			</div>
-			<div>
-				<label for="">loué pour : </label>
-				{{request.nbDays}} Jours
-			</div>
+                <div>
+                    <label for="">Status : </label>
+                    {{request.status}}
+                </div>
+                <div>
+                    <label for="">Prix d'un livre :</label>
+                    {{request.amount}} €
+                </div>
+                <div>
+                    <label for="">Offre faite par :</label>
+                    {{request.othor}}
+                </div>
+                <div>
+                    <label for="">titre :</label>
+                    {{request.book_title}}
+                </div>
+                <div>
+                    <label for="">nombre d'exemplaires loués :</label>
+                    {{request.nbBooks}}
+                </div>
+                <div>
+                    <label for="">Loué pour : </label>
+                    {{request.nbDays}} jour(s)
+                </div>
 			{% endfor %}
 		</body>
 	</html>

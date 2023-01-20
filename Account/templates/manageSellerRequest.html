@@ -6,54 +6,56 @@
 	<html>
 		<head> </head>
 		<body>
-			{% if requests%} {% for request in requests %}
-			<div>
-				<label for="">Status</label>
-				{{request.status}}
-			</div>
-			<div>
-				<label for="">Prix d'un livre :</label>
-				{{request.amount}} €
-			</div>
-			<div>
-				<label for="">demandé par : </label>
-				{{request.othor}}
-			</div>
-			<div>
-				<label for="">titre : </label>
-				{{request.book_title}}
-			</div>
-			<div>
-				<label for="">nombre d'exemplaires demandés : </label>
-				{{request.nbBooks}}
-			</div>
-			<div>
-				<label for="">loué pour : </label>
-				{{request.nbDays}} Jours
-			</div>
-			<div class="btn-block">
-				<a
-					class="btn btn-primary"
-					href="/account/challengeOperation/{{request.operationID}}"
-					role="button"
-					>Refaire une offre</a
-				>
-				{% if not request.challengedByMe %}
-				<a
-					class="btn btn-primary"
-					href="/account/acceptRequestClient/{{request.operationID}}"
-					role="button"
-					>Accepter</a
-				>
-				<a
-					class="btn btn-primary"
-					href="/account/refuseRequestClient/{{request.operationID}}"
-					role="button"
-					>Refuser</a
-				>
-				{% endif %}
-			</div>
-			{% endfor %} {% else %}
+			{% if requests%}
+                {% for request in requests %}
+                    <div>
+                        <label for="">Status :</label>
+                        {{request.status}}
+                    </div>
+                    <div>
+                        <label for="">Prix d'un livre :</label>
+                        {{request.amount}} €
+                    </div>
+                    <div>
+                        <label for="">Demandé par :</label>
+                        {{request.othor}}
+                    </div>
+                    <div>
+                        <label for="">Titre :</label>
+                        {{request.book_title}}
+                    </div>
+                    <div>
+                        <label for="">Nombre d'exemplaires demandés :</label>
+                        {{request.nbBooks}}
+                    </div>
+                    <div>
+                        <label for="">Loué pour :</label>
+                        {{request.nbDays}} jour(s)
+                    </div>
+                    <div class="btn-block">
+                        <a
+                            class="btn btn-primary"
+                            href="/account/challengeOperation/{{request.operationID}}"
+                            role="button"
+                            >Refaire une offre</a
+                        >
+                        {% if not request.challengedByMe %}
+                            <a
+                                class="btn btn-primary"
+                                href="/account/acceptRequestClient/{{request.operationID}}"
+                                role="button"
+                                >Accepter</a
+                            >
+                            <a
+                                class="btn btn-primary"
+                                href="/account/refuseRequestClient/{{request.operationID}}"
+                                role="button"
+                                >Refuser</a
+                            >
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
 			<div>Vous avez zéro demande actuellement</div>
 			{% endif %}
 		</body>
