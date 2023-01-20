@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks%}
-{% block title %}Mes Livres{% endblock %}
+{% block title %}Mes livres{% endblock %}
 {% block content %}
 	<html>
 		<head></head>
@@ -13,7 +13,7 @@
                 <div>{{ book.shortDescription }}</div>
                 <div>{{ book.resume }}</div>
                 <div>
-                    <img src="/media/bookPictures/droit.jpeg" alt="my image" />
+                    <img src="/media/droit.jpeg" alt="Image d'un livre" />
                 </div>
                 <div>
                     <a class="btn btn-success" href="/account/manageBook/{{book.id}}">
