@@ -481,7 +481,7 @@ def manageClientReadingGroup(request):
     nbFreePlaces = 10 - nbParticipents
     is_full = group.is_full
     is_canceled = group.is_canceled
-    vm = GroupsVM(name = name, nameBook = nameBook, imgPath=img, nbFreePlaces= nbFreePlaces , adress = adress, nbParticipents = nbParticipents, idGroup= id, is_canceled = is_canceled, eventDate = eventDate, is_full = is_full, eventMoment=eventMoment)
+    vm = GroupsVM(idGroup = id, name = name, nameBook = nameBook, imgPath=img, nbFreePlaces= nbFreePlaces , adress = adress, nbParticipents = nbParticipents, is_canceled = is_canceled, eventDate = eventDate, is_full = is_full, eventMoment=eventMoment)
     groupsVM.append(vm)
   return render(request, 'manageClientGroups.html', {'groups' : groupsVM})
 
@@ -522,13 +522,16 @@ def joinReadingGroup(request, groupID):
   group = models.ReadingGroup.objects.get(pk = groupID)
 
   if group.is_full :
+    messages.add_message(request, messages.ERROR, 'le groupe est complet')
     # TODO message error the groups is complete (block the user on front to dont let him ask for group those are full with is_full attribute on ReadingGroup)
-    return redirect('/account/manageReadingGroupsForClient')
+    return redirect('/account/manageReadingGroupsForClient', message = messages)
   else :
     # First check if client has rented the book
     if isBookInUserLoans(request.user,group.book) :
+      # in the template add way to redirect the user in requestBook/{idBook}
+      messages.add_message(request, messages.ERROR, 'vous devez emprunter ce livre pour participer au groupe de lécture')
       # TODO add error message to say the user has no rented the book to be able to join this group, maybe redirect with href to rent the book !
-      return redirect('/account/allReadingGroup')
+      return redirect('/account/allReadingGroup', messages = messages)
 
     # Add the client in the group
     addRelationMemberGroup(group, request.user)
@@ -541,8 +544,19 @@ def joinReadingGroup(request, groupID):
 #TODO : implement
 @perm_client_required
 def leaveReadingGroup(request, groupID):
-  
-  return redirect('/account/manageReadingGroupsForClient')
+  try : 
+    models.MembersGroup.objects.filter(member = request.user, group_id = groupID).delete()
+  except Exception : 
+    messages.add_message(request, messages.WARNING, 'l\'operation n\'a pas pu s\'éffectuer ')
+    # TODO : add error message to say failed to leave the group
+    return redirect('/account/manageReadingGroupsForClient', messages = messages)  
+  # decrement the nbMembers of the target group
+  target_book = models.ReadingGroup.objects.get(pk = groupID)
+  newNbmembers = target_book.nbMembers - 1
+  target_book.nbMembers = newNbmembers
+  target_book.save()
+  messages.add_message(request, messages.WARNING, 'vous avez quitter un groupe de lécture')
+  return redirect('/account/manageReadingGroupsForClient', messages = messages)  
 
 # Private methods
 def addRelationBookSeller(book,user):

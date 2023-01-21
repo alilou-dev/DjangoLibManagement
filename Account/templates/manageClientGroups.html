@@ -249,6 +249,13 @@
 			</style>
 		</head>
 		<body>
+			{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
 			{% if groups %}
                 {% for group in groups %}
                     <div>
@@ -280,7 +287,7 @@
                                 </div>
                             {% endif %}
                             <div>
-                                <a class="btn btn-danger" href="/account/leaveGroup/{{group.id}}">
+                                <a class="btn btn-danger" href="/account/leaveGroup/{{group.idGroup}}">
                                     quitter Le groupe
                                 </a>
                             </div>
