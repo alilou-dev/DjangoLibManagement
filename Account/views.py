@@ -12,6 +12,7 @@ from DjangoBib.decorators.noAccountHolder import no_userHasAccount_required
 from DjangoBib.decorators.userMustBeSeller import perm_seller_required
 from DjangoBib.decorators.userMustBeClient import perm_client_required
 from django.db import IntegrityError
+from django.contrib import messages
 
 @no_userHasAccount_required
 def createAccount(request):
@@ -473,7 +474,7 @@ def manageClientReadingGroup(request):
     name = group.name
     nameBook = models.Book.objects.filter(pk = (group.book_id)).values('title')[0]['title']
     img = group.img
-    adress = group.eventDate
+    adress = group.adresse
     eventDate = group.eventDate
     eventMoment = group.eventMoment
     nbParticipents = group.nbMembers
