@@ -27,8 +27,9 @@ urlpatterns = [
   path('manageReadingGroupsForClient', views.manageClientReadingGroup, name='ManageGroup'),
   path('manageReadingGroupsForSeller', views.manageSellerReadingGroup, name='ManageGroup'),
   path('removeGroup/<int:groupID>', views.cancelReadingGroup, name="RemoveGroup"),
-  path('joinGroup/<int:groupID>', views.joinReadingGroup, name='JoinGroup')
-]
+  path('joinGroup/<int:groupID>', views.joinReadingGroup, name='JoinGroup'),
+  path('leaveGroup/<int:groupID>',views.leaveReadingGroup,name='LeaveGroup')
+] 
 
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

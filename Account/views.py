@@ -92,6 +92,7 @@ def allBooks(request):
   allBooks = models.Book.objects.all().values()
   return render(request,'clientLibrary.html', {'books' : allBooks})
 
+#TODO : VÉRIFIER QUE LORSQUE ON AUTORIZE UNE PARTICIPATION A UN GROUPE ON A BIEN UNE RELATION SUR UNE OPÉRATION AVEC UN STATUT "R" POUR SUCCESS KELKE PART DANS JOINREADEINGGROUP
 @perm_client_required
 def rentedBooks(request):
   operations_done = models.Operation.objects.filter(client = request.user).filter(status = 'S')
@@ -373,15 +374,12 @@ def markRequestAsRestored(request, operationID):
 
 @perm_seller_required
 def managePublishedBook(request, bookID):
-  # Here we have the id of the book to manage (change the quantity for example)
-  # TODO : add away to manage properly the seller books
   book = models.Book.objects.get(pk = bookID)
 
   if request.method == 'POST':
     form = ManageBookForm(request.POST)
 
     if form.is_valid():
-      # TODO : update the book requested after checking what field must be updated (check if request.POST['name_field'] !== "")
       newTitle = request.POST['newTitle']
       newEditor = request.POST['newEditor']
       newQuantity = request.POST['newQuantity']
@@ -468,7 +466,23 @@ def createReadingGroup(request, bookID):
 @perm_client_required
 def manageClientReadingGroup(request):
   groupsCurrentClient = models.MembersGroup.objects.filter(member = request.user).values('group')
-  return render(request, 'manageClientGroups.html', {'groups' : groupsCurrentClient})
+  groupsVM = []
+  for grp in groupsCurrentClient :
+    group = models.ReadingGroup.objects.get(pk = grp['group'])
+    id  = group.id
+    name = group.name
+    nameBook = models.Book.objects.filter(pk = (group.book_id)).values('title')[0]['title']
+    img = group.img
+    adress = group.eventDate
+    eventDate = group.eventDate
+    eventMoment = group.eventMoment
+    nbParticipents = group.nbMembers
+    nbFreePlaces = 10 - nbParticipents
+    is_full = group.is_full
+    is_canceled = group.is_canceled
+    vm = GroupsVM(name = name, nameBook = nameBook, imgPath=img, nbFreePlaces= nbFreePlaces , adress = adress, nbParticipents = nbParticipents, idGroup= id, is_canceled = is_canceled, eventDate = eventDate, is_full = is_full, eventMoment=eventMoment)
+    groupsVM.append(vm)
+  return render(request, 'manageClientGroups.html', {'groups' : groupsVM})
 
 @perm_seller_required
 def manageSellerReadingGroup(request):
@@ -502,7 +516,6 @@ def cancelReadingGroup(request, groupID):
   groupToCancel.save()
   return redirect('/account/manageReadingGroupsForSeller')
 
-# TODO call the private method addRelationGroupMember when user joins a group
 @perm_client_required
 def joinReadingGroup(request, groupID):
   group = models.ReadingGroup.objects.get(pk = groupID)
@@ -513,7 +526,7 @@ def joinReadingGroup(request, groupID):
   else :
     # First check if client has rented the book
     if isBookInUserLoans(request.user,group.book) :
-      # TODO add error message to say the user has no rented the book to be able to join this group
+      # TODO add error message to say the user has no rented the book to be able to join this group, maybe redirect with href to rent the book !
       return redirect('/account/allReadingGroup')
 
     # Add the client in the group
@@ -524,8 +537,10 @@ def joinReadingGroup(request, groupID):
 
     return redirect('/account/manageReadingGroupsForClient')
 
+#TODO : implement
 @perm_client_required
 def leaveReadingGroup(request, groupID):
+  
   return redirect('/account/manageReadingGroupsForClient')
 
 # Private methods
@@ -543,6 +558,7 @@ def addRelationMemberGroup(group, user):
       group = group,
     )
   except IntegrityError :
+    
     # TODO add message error user already member of group
     return redirect('/account/manageReadingGroupsForClient')
 
@@ -560,7 +576,7 @@ def checkAndSetOrNotAvailabilityGroup(group):
 # Sumury : check if the user can join the group after checking his loans (if the target_book is in his loans on not)
 def isBookInUserLoans(user, book):
   result = False
-  getLoanBookIfExists = models.Operation.objects.filter(client = user, target_book = book)
+  getLoanBookIfExists = models.Operation.objects.filter(client = user, target_book = book, status = "R")
 
   if getLoanBookIfExists.count() > 0 :
     result = True

@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-	{% if request.user.account.accountType !='cl' and request.user.account.accountType != 'lb' %}
-		<div class="btn-block">
+	{% if not request.user.account.accountType %}
+		<div class="btn-block">	
 			<a href="/account/create" class="btn btn-success" role="button">
 				Vous n'avez pas encore de compte !
 			</a>

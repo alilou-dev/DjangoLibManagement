@@ -269,10 +269,6 @@
                                 <label for="">L'événement aura lieu le :</label>
                                 {{ group.eventDate }}
                             </div>
-                            <div>
-                                <label for="">Nombres de participant(s) actuelle(s) :</label>
-                                {{ group.nbParticipents }}
-                            </div>
                             {% if not group.is_full %}
                                 <div>
                                     <label for="">Il reste encore :</label>
@@ -284,8 +280,8 @@
                                 </div>
                             {% endif %}
                             <div>
-                                <a class="btn btn-danger" href="/account/removeGroup/{{group.id}}">
-                                    Annuler l'événement
+                                <a class="btn btn-danger" href="/account/leaveGroup/{{group.id}}">
+                                    quitter Le groupe
                                 </a>
                             </div>
                         {% else %}
@@ -302,7 +298,7 @@
                                 {{ group.eventDate }}
                             </div>
                             <div>
-                                <a class="btn btn-info">L'événement a été annulé</a>
+                                <a class="btn btn-info">L'événement a finalement été annulé</a>
                             </div>
                         {% endif %}
                     </div>
