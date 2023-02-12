@@ -24,7 +24,7 @@
 				}
 
 				.signup_box {
-					width: 1050px;
+					width: 500px;
 					height: 600pax;
 					position: absolute;
 					top: 50%;
@@ -38,7 +38,7 @@
 				}
 
 				.signup_box .left {
-					width: 41%;
+					width: 100%;
 					height: 100%;
 					padding: 25px 25px;
 				}
@@ -63,7 +63,7 @@
 					justify-content: center;
 					align-self: center;
 					height: 100%;
-					width: 73%;
+					width: 100%;
 					margin: auto;
 				}
 
@@ -152,40 +152,37 @@
 					padding-right: 7px;
 					margin-top: -3px;
 				}
+
+				.text-decoration-none {
+					text-decoration: none;
+					color: grey;
+				}
+
+				.text-decoration-none:hover {
+					text-decoration: none;
+					color: grey;
+				}
 			</style>
 		</head>
 		<body>
 			<section class="signup">
 				<div class="signup_box">
 					<div class="left">
-						<div class="top_link">
-							<a href="/login">
-								{% load static %}
-								<img src="{% static 'book.jpg' %}" alt="" />Déjà membre ?</a
-							>
-						</div>
-						<div class="contact">
-							<form method="post">
-								{% csrf_token %}
-								<h3>S'inscrire</h3>
-								{% render_field form.username type="text" placeholder="USERNAME" %}
-								{% render_field form.email type="email" placeholder="EMAIL" %}
-								{% render_field form.password1 type="password" placeholder="PASSWORD" %}
-								{% render_field form.password2 type="password" placeholder="PASSWORD" %}
-								<button class="submit">S'enregistrer</button>
-							</form>
-						</div>
-					</div>
-					<div class="right">
-						<div class="right-text">
-							<h5>Votre librairie favorite</h5>
-						</div>
-						<div class="right-inductor">
-							<img
-								src="{% static '../../../DjangoBib/static/images/book.jpg' %}"
-								alt=""
-							/>
-						</div>
+						<form method="post">
+							{% csrf_token %}
+							<h3>S'inscrire</h3>
+							{% render_field form.username type="text" placeholder="USERNAME" %}
+							{% render_field form.email type="email" placeholder="EMAIL" %}
+							{% render_field form.password1 type="password" placeholder="PASSWORD" %}
+							{% render_field form.password2 type="password" placeholder="PASSWORD" %}
+							<div class="text-decoration-none">
+								<a href="/login" class="text-decoration-none">
+									{% load static %}
+									Déjà membre ?</a
+								>
+							</div>
+							<button class="submit">S'enregistrer</button>
+						</form>
 					</div>
 				</div>
 			</section>
