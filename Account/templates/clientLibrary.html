@@ -5,35 +5,33 @@
 {% block content %}
     <html>
         <head> </head>
+        <style>
+            .books {
+                padding: 10px;
+            }
+
+            img {
+                width: 250px;
+                height: 150px;
+            }
+        </style>
         <body>
-            {% for book in books %}
-                <div>
-                    {{ book.title }}
-                </div>
-                <div>
-                    {{ book.editor }}
-                </div>
-                <div>
-                    {{ book.shortDescription }}
-                </div>
-                <div>
-                    {{ book.resume }}
-                </div>
-                <div>
-                    {{ book.price }}
-                </div>
-                <div>
-                    <img src="/media/book.jpeg" alt="Image d'un livre">
-                </div>
-                <div>
-                    Nombre de livre dispo : {{ book.quantity }}
-                </div>
-                {% if book.quantity > 0 %}
-                    <div class="btn-block">
-                        <a class="btn btn-primary" href="/account/requestBook/{{book.id}}" role="button">Demander ce livre</a>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <div class="books">
+                {% for book in books %}
+                    <div>Titre : {{ book.title }}</div>
+                    <div>Éditeur : {{ book.editor }}</div>
+                    <div>Description : {{ book.shortDescription }}</div>
+                    <div>Résumé : {{ book.resume }}</div>
+                    <div>Prix : {{ book.price }} €</div>
+                    <div><img src="/media/book.jpeg" alt="Image d'un livre"></div>
+                    <div>Nombre de livre dispo : {{ book.quantity }}</div>
+                    {% if book.quantity > 0 %}
+                        <div class="btn-block">
+                            <a class="btn btn-primary" href="/account/requestBook/{{book.id}}" role="button">Demander ce livre</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
 		</body>
 	</html>
 {% endblock %}

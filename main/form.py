@@ -32,7 +32,7 @@ class AccountCreationForm(forms.Form):
   adress = forms.CharField(max_length = 200, required=True)
   zipCode = forms.CharField(max_length = 5, required=True)
   city = forms.CharField(max_length = 20, required=True)
-  phone_number = forms.CharField(max_length=15, required=True, validators=[phone_number_validator])
+  phone_number = forms.CharField(max_length=15, required=True)
 
   class Meta:
     model = Account

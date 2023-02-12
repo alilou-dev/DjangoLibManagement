@@ -5,25 +5,35 @@
 {% block content %}
 	<html>
 		<head></head>
+        <style>
+            .books {
+                padding: 10px;
+            }
+
+            img {
+                width: 250px;
+                height: 150px;
+            }
+        </style>
 		<body>
-			{% for book in books %}
-                <div>{{ book.title }}</div>
-                <div>{{ book.editor }}</div>
-                <div>{{ book.price }}</div>
-                <div>{{ book.shortDescription }}</div>
-                <div>{{ book.resume }}</div>
-                <div>
-                    <img src="/media/book.jpeg" alt="Image d'un livre" />
-                </div>
-                <div>
-                    <a class="btn btn-success" href="/account/manageBook/{{book.id}}">
-                        Gérer mon livre
-                    </a>
-                    <a class="btn btn-dark" href="/account/createReadingGroup/{{book.id}}">
-                        Organiser un groupe de lecture
-                    </a>
-                </div>
-			{% endfor %}
+            <div class="books">
+                {% for book in books %}
+                    <div>Titre : {{ book.title }}</div>
+                    <div>Éditeur : {{ book.editor }}</div>
+                    <div>Prix : {{ book.price }} €</div>
+                    <div>Description : {{ book.shortDescription }}</div>
+                    <div>Résumé : {{ book.resume }}</div>
+                    <div class="mb-2"><img src="/media/book.jpeg" alt="Image d'un livre" /></div>
+                    <div>
+                        <a class="btn btn-success" href="/account/manageBook/{{book.id}}">
+                            Gérer mon livre
+                        </a>
+                        <a class="btn btn-dark" href="/account/createReadingGroup/{{book.id}}">
+                            Organiser un groupe de lecture
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
 		</body>
 	</html>
 {% endblock %}
