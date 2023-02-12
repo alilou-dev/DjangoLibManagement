@@ -44,20 +44,20 @@
                     </div>
                     <div class="btn-block pl-0">
                         <a
-                            class="btn btn-primary"
+                            class="btn btn-secondary"
                             href="/account/challengeOperation/{{request.operationID}}"
                             role="button"
                             >Refaire une offre</a
                         >
                         {% if not request.challengedByMe %}
                             <a
-                                class="btn btn-primary"
+                                class="btn btn-secondary"
                                 href="/account/acceptRequestClient/{{request.operationID}}"
                                 role="button"
                                 >Accepter</a
                             >
                             <a
-                                class="btn btn-primary"
+                                class="btn btn-secondary"
                                 href="/account/refuseRequestClient/{{request.operationID}}"
                                 role="button"
                                 >Refuser</a

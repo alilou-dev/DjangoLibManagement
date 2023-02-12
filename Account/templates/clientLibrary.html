@@ -27,7 +27,7 @@
                     <div>Nombre de livre dispo : {{ book.quantity }}</div>
                     {% if book.quantity > 0 %}
                         <div class="btn-block">
-                            <a class="btn btn-primary" href="/account/requestBook/{{book.id}}" role="button">Demander ce livre</a>
+                            <a class="btn btn-secondary" href="/account/requestBook/{{book.id}}" role="button">Demander ce livre</a>
                         </div>
                     {% endif %}
                 {% endfor %}
