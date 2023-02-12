@@ -11,11 +11,6 @@
 				crossorigin="anonymous"
 			/>
 			<title>{% block title %}{% endblock %}</title>
-			<style>
-				.content-bloc {
-					padding: 20px 10px;
-				}
-			</style>
 		</head>
 		<body>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -99,7 +94,7 @@
 					</ul>
 				</div>
 			</nav>
-			<div class="content-bloc">{% block content %}{% endblock %}</div>
+			<div>{% block content %}{% endblock %}</div>
 			<script
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 				integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
