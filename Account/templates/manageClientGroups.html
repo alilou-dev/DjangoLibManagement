@@ -245,6 +245,10 @@
 						display: block;
 						padding-bottom: 5px;
 					}
+
+					.groups {
+						padding: 10px;
+					}
 				}
 			</style>
 		</head>
@@ -258,7 +262,7 @@
 			{% endif %}
 			{% if groups %}
                 {% for group in groups %}
-                    <div>
+                    <div class="groups">
                         {% if not group.is_canceled%}
                             <div>
                                 <label for="">Nom du groupe :</label>

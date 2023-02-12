@@ -5,6 +5,16 @@
 {% block content %}
 	<html>
 		<head> </head>
+
+        <style>
+            .btn-block {
+                padding: 10px;
+            }
+
+            .pl-0 {
+                padding-left: 0px;
+            }
+        </style>
 		<body>
 			{% if requests%}
                 {% for request in requests %}
@@ -32,7 +42,7 @@
                         <label for="">Loué pour :</label>
                         {{request.nbDays}} jour(s)
                     </div>
-                    <div class="btn-block">
+                    <div class="btn-block pl-0">
                         <a
                             class="btn btn-primary"
                             href="/account/challengeOperation/{{request.operationID}}"
@@ -56,7 +66,7 @@
                     </div>
                 {% endfor %}
             {% else %}
-			<div>Vous avez zéro demande actuellement</div>
+			<div class="p-1">Vous avez zéro demande actuellement</div>
 			{% endif %}
 		</body>
 	</html>

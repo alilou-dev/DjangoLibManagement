@@ -5,33 +5,40 @@
 {% block content %}
 	<html>
 		<head> </head>
+        <style>
+            .block {
+                padding: 10px;
+            }
+        </style>
 		<body>
-			{% for request in requests %}
-                <div>
-                    <label for="">Status :</label>
-                    {{request.status}}
-                </div>
-                <div>
-                    <label for="">Prix d'un livre :</label>
-                    {{request.amount}} €
-                </div>
-                <div>
-                    <label for="">Publié par :</label>
-                    {{request.othor}}
-                </div>
-                <div>
-                    <label for="">Titre :</label>
-                    {{request.book_title}}
-                </div>
-                <div>
-                    <label for="">Nombre d'exemplaires loués :</label>
-                    {{request.nbBooks}}
-                </div>
-                <div>
-                    <label for="">Loué pour :</label>
-                    {{request.nbDays}} jour(s)
-                </div>
-			{% endfor %}
+            <div class="block">
+                {% for request in requests %}
+                    <div>
+                        <label for="">Status :</label>
+                        {{request.status}}
+                    </div>
+                    <div>
+                        <label for="">Prix d'un livre :</label>
+                        {{request.amount}} €
+                    </div>
+                    <div>
+                        <label for="">Publié par :</label>
+                        {{request.othor}}
+                    </div>
+                    <div>
+                        <label for="">Titre :</label>
+                        {{request.book_title}}
+                    </div>
+                    <div>
+                        <label for="">Nombre d'exemplaires loués :</label>
+                        {{request.nbBooks}}
+                    </div>
+                    <div>
+                        <label for="">Loué pour :</label>
+                        {{request.nbDays}} jour(s)
+                    </div>
+                {% endfor %}
+            </div>
 		</body>
 	</html>
 {% endblock %}

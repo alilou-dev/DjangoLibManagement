@@ -22,6 +22,10 @@
                     min-height: 100%;
                 }
 
+                .groups {
+                    padding: 10px;
+                }
+
                 body,
                 div,
                 form,
@@ -249,7 +253,7 @@
         <body>
             {% if groups %}
                 {% for group in groups %}
-                    <div>
+                    <div class="groups">
                         {% if not group.is_canceled %}
                             <div>
                                 <label for="">Nom du groupe :</label>

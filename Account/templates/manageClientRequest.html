@@ -5,65 +5,80 @@
 {% block content %}
 	<html>
 		<head> </head>
+        <style>
+            .btn-block {
+                padding: 10px;
+            }
+
+            .pl-0 {
+                padding-left: 0px;
+            }
+
+            .block {
+                padding: 10px;
+            }
+        </style>
 		<body>
 			{% if requests%}
-                {% for request in requests %}
-                    <div>
-                        <label for="">Status :</label>
-                        {{request.status}}
-                    </div>
-                    <div>
-                        <label for="">Prix :</label>
-                        {{request.amount}} €
-                    </div>
-                    <div>
-                        <label for="">Publié par :</label>
-                        {{request.othor}}
-                    </div>
-                    <div>
-                        <label for="">Titre :</label>
-                        {{request.book_title}}
-                    </div>
-                    <div>
-                        <label for="">Nombre d'exemplaire(s) loué(s) :</label>
-                        {{request.nbBooks}}
-                    </div>
-                    <div>
-                        <label for="">Loué pour : </label>
-                        {{request.nbDays}} jour(s)
-                    </div>
-                    <div class="btn-block">
-                        {% if request.status == 'En Attente'%}
-                            <a
-                                class="btn btn-primary"
-                                href="/account/challengeOperation/{{request.operationID}}"
-                                role="button"
-                                >Refaire une offre</a
-                            >
-                        {% else %}
-                            <a
-                                class="btn btn-primary"
-                                href="/account/challengeOperation/{{request.operationID}}"
-                                role="button"
-                                >Refaire une offre</a
-                            >
-                            {% if not request.challengedByMe %}
+                <div class="block">
+                    {% for request in requests %}
+                        <div>
+                            <label for="">Status :</label>
+                            {{request.status}}
+                        </div>
+                        <div>
+                            <label for="">Prix :</label>
+                            {{request.amount}} €
+                        </div>
+                        <div>
+                            <label for="">Publié par :</label>
+                            {{request.othor}}
+                        </div>
+                        <div>
+                            <label for="">Titre :</label>
+                            {{request.book_title}}
+                        </div>
+                        <div>
+                            <label for="">Nombre d'exemplaire(s) loué(s) :</label>
+                            {{request.nbBooks}}
+                        </div>
+                        <div>
+                            <label for="">Loué pour : </label>
+                            {{request.nbDays}} jour(s)
+                        </div>
+                        <div class="btn-block pl-0">
+                            {% if request.status == 'En Attente'%}
                                 <a
                                     class="btn btn-primary"
-                                    href="/account/acceptRequestSeller/{{request.operationID}}"
+                                    href="/account/challengeOperation/{{request.operationID}}"
                                     role="button"
-                                    >Accepter</a
+                                    >Refaire une offre</a
                                 >
+                            {% else %}
                                 <a
                                     class="btn btn-primary"
-                                    href="/account/refuseRequestSeller/{{request.operationID}}"
+                                    href="/account/challengeOperation/{{request.operationID}}"
                                     role="button"
-                                    >Refuser</a
+                                    >Refaire une offre</a
                                 >
+                                {% if not request.challengedByMe %}
+                                    <a
+                                        class="btn btn-primary"
+                                        href="/account/acceptRequestSeller/{{request.operationID}}"
+                                        role="button"
+                                        >Accepter</a
+                                    >
+                                    <a
+                                        class="btn btn-primary"
+                                        href="/account/refuseRequestSeller/{{request.operationID}}"
+                                        role="button"
+                                        >Refuser</a
+                                    >
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </div>
-                {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
             {% else %}
 			<div>Vous n'avez aucune demande actuellement</div>
 			{% endif %}

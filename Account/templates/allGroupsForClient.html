@@ -246,6 +246,10 @@
 						display: block;
 						padding-bottom: 5px;
 					}
+
+					.groups {
+						padding: 10px;
+					}
 				}
 			</style>
 		</head>
@@ -258,7 +262,7 @@
 				</ul>
 			{% endif %}
 			{% for group in groups %}
-			<div>
+			<div class="groups">
 				<div>
 					<label for="">Nom du groupe :</label>
 					{{ group.name }}
