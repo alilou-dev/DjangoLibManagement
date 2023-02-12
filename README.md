@@ -72,7 +72,8 @@ Go to the project directory
 
 - [Ali Raid](https://github.com/alilou-dev)
 - [Júlio Pereira](https://github.com/Roulioo)
-- [YacineSOUSSI](https://www.github.com/YacineSoussi)
+- [Yacine Soussi](https://www.github.com/YacineSoussi)
+- [Moncef Saiki](https://github.com/moncefSaiki)
 
 ## License
 
