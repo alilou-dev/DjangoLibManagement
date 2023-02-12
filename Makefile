@@ -1,4 +1,7 @@
-.PHONY: build stop restart
+.PHONY: migrations build stop restart
+
+migrations:
+	docker compose exec web python3 manage.py migrate
 
 build:
 	docker-compose -up -d --build

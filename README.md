@@ -26,6 +26,12 @@ Go to the project directory
 
 ### Linux and macOS
 
+- Make migrations
+
+```bash
+  make migrations
+```
+
 - Run the project the first time
 
 ```bash
@@ -45,6 +51,12 @@ Go to the project directory
 ```
 
 ### Windows
+
+- Make migrations
+
+```bash
+  docker compose exec web python3 manage.py migrate
+```
 
 - Run the project the first time
 
