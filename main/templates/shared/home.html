@@ -3,7 +3,7 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 	{% if not request.user.account.accountType %}
-		<div class="btn-block">	
+		<div class="btn-block">
 			<a href="/account/create" class="btn btn-success" role="button">
 				Vous n'avez pas encore de compte !
 			</a>
